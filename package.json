@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "electron-main.mjs",
   "scripts": {
-    "build": "node build-web.mjs",
     "build:web": "node build-web.mjs",
     "cap:sync": "npm run build:web && npx cap sync android",
     "build:apk": "npm run cap:sync && npm run android:patch-java && cd android && gradlew.bat assembleDebug",

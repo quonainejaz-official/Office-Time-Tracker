@@ -1,9 +1,20 @@
+# System folders
+.git/
+.windsurf/
+node_modules/
+
+# Native app folders
 android/
 dist/
 .gradle-local/
-electron-main.mjs
+
+# Build scripts and configs
 build-web.mjs
 patch-java17.mjs
 capacitor.config.json
+electron-main.mjs
 package-lock.json
+
+# Build assets
+www/
 README.md
