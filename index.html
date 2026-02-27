@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#2196F3" />
+    <meta
+      name="description"
+      content="Office Time Calculator - Track your work hours with progress visualization"
+    />
+
+    <link rel="manifest" href="manifest.json" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <title>Office Time Calculator</title>
+  </head>
+  <body>
+    <div id="app" class="app-container">
+      <header class="header">
+        <div class="header-content">
+          <div class="logo-wrapper">
+            <div class="logo-icon-container">
+                <div class="logo-glow"></div>
+                <div class="logo-icon-visual">
+                    <div class="logo-ring"></div>
+                    <div class="logo-hands">
+                        <div class="hand-hour"></div>
+                        <div class="hand-min"></div>
+                    </div>
+                </div>
+            </div>
+            <h1 class="modern-wordmark">
+                <span class="word-office">Office</span>
+                <span class="word-time">Time</span>
+                <span class="word-calc">Tracker</span>
+            </h1>
+          </div>
+          <div class="header-controls">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" type="button">
+              <span class="theme-icon" aria-hidden="true">
+                <svg class="icon icon-theme" viewBox="0 0 24 24" focusable="false">
+                  <path d="M12 4.25A1 1 0 0 1 13 5.25V6a1 1 0 1 1-2 0v-.75a1 1 0 0 1 1-1Zm0 13.75a1 1 0 0 1 1 1v.75a1 1 0 1 1-2 0V19a1 1 0 0 1 1-1ZM5.9 6.64a1 1 0 0 1 1.41 0l.53.53a1 1 0 0 1-1.41 1.41l-.53-.53a1 1 0 0 1 0-1.41Zm10.26 10.26a1 1 0 0 1 1.41 0l.53.53a1 1 0 0 1-1.41 1.41l-.53-.53a1 1 0 0 1 0-1.41ZM4.25 12a1 1 0 0 1 1-1H6a1 1 0 1 1 0 2h-.75a1 1 0 0 1-1-1Zm13.75 0a1 1 0 0 1 1-1h.75a1 1 0 1 1 0 2H19a1 1 0 0 1-1-1ZM7.84 16.16a1 1 0 0 1 0 1.41l-.53.53a1 1 0 1 1-1.41-1.41l.53-.53a1 1 0 0 1 1.41 0Zm10.26-10.26a1 1 0 0 1 0 1.41l-.53.53a1 1 0 0 1-1.41-1.41l.53-.53a1 1 0 0 1 1.41 0ZM12 8.5a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Z"></path>
+                </svg>
+              </span>
+            </button>
+            <button
+              id="settings-btn"
+              class="settings-btn"
+              aria-label="Settings"
+              type="button"
+            >
+              <span class="settings-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" focusable="false">
+                  <path d="M10.2 3.3a1 1 0 0 1 1-.8h1.6a1 1 0 0 1 1 .8l.4 1.8c.4.1.8.3 1.2.5l1.5-1a1 1 0 0 1 1.3.1l1.1 1.1a1 1 0 0 1 .1 1.3l-1 1.5c.2.4.4.8.5 1.2l1.8.4a1 1 0 0 1 .8 1v1.6a1 1 0 0 1-.8 1l-1.8.4a6.4 6.4 0 0 1-.5 1.2l1 1.5a1 1 0 0 1-.1 1.3l-1.1 1.1a1 1 0 0 1-1.3.1l-1.5-1c-.4.2-.8.4-1.2.5l-.4 1.8a1 1 0 0 1-1 .8h-1.6a1 1 0 0 1-1-.8l-.4-1.8a6.4 6.4 0 0 1-1.2-.5l-1.5 1a1 1 0 0 1-1.3-.1L3.8 19a1 1 0 0 1-.1-1.3l1-1.5a6.4 6.4 0 0 1-.5-1.2l-1.8-.4a1 1 0 0 1-.8-1v-1.6a1 1 0 0 1 .8-1l1.8-.4c.1-.4.3-.8.5-1.2l-1-1.5a1 1 0 0 1 .1-1.3L4.9 4.6a1 1 0 0 1 1.3-.1l1.5 1c.4-.2.8-.4 1.2-.5l.4-1.8ZM12 8.6a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8Z"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content">
+        <section id="main-screen" class="screen">
+          <section class="progress-section">
+            <div class="progress-container">
+              <svg class="progress-ring" viewBox="0 0 200 200">
+                <circle
+                  class="progress-ring-bg"
+                  cx="100"
+                  cy="100"
+                  r="90"
+                  fill="none"
+                  stroke="#e0e0e0"
+                  stroke-width="12"
+                />
+                <circle
+                  class="progress-ring-fill"
+                  cx="100"
+                  cy="100"
+                  r="90"
+                  fill="none"
+                  stroke="#2196F3"
+                  stroke-width="12"
+                  stroke-linecap="round"
+                  stroke-dasharray="565.48"
+                  stroke-dashoffset="565.48"
+                  transform="rotate(-90 100 100)"
+                />
+              </svg>
+
+              <div class="time-display">
+                <div class="main-time" id="remaining-time" aria-live="polite">
+                  08:00:00
+                </div>
+                <div class="time-label">Remaining</div>
+                <div class="worked-time" id="worked-time" aria-live="polite">
+                  00:00:00
+                </div>
+                <div class="time-label">Worked</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="controls-section">
+            <div class="controls-container">
+              <button
+                id="checkin-btn"
+                class="control-btn primary-btn"
+                disabled
+                type="button"
+              >
+                <span class="btn-icon" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" focusable="false">
+                    <path d="M5 12a1 1 0 0 1 1-1h8.6l-2.3-2.3a1 1 0 1 1 1.4-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 1 1-1.4-1.4l2.3-2.3H6a1 1 0 0 1-1-1Zm-3 7V5a2 2 0 0 1 2-2h4a1 1 0 1 1 0 2H4v14h4a1 1 0 1 1 0 2H4a2 2 0 0 1-2-2Z"></path>
+                  </svg>
+                </span>
+                <span class="btn-text">Check In</span>
+              </button>
+
+              <button
+                id="break-start-btn"
+                class="control-btn secondary-btn"
+                disabled
+                type="button"
+              >
+                <span class="btn-icon" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" focusable="false">
+                    <path d="M12 3a1 1 0 0 1 1 1v7.4l4.8 2.8a1 1 0 0 1-1 1.8l-5.3-3.1a1 1 0 0 1-.5-.9V4a1 1 0 0 1 1-1Zm0 19a10 10 0 1 1 0-20 10 10 0 0 1 0 20Z"></path>
+                  </svg>
+                </span>
+                <span class="btn-text">Break Start</span>
+              </button>
+
+              <button
+                id="break-stop-btn"
+                class="control-btn secondary-btn"
+                disabled
+                type="button"
+              >
+                <span class="btn-icon" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" focusable="false">
+                    <path d="M8 7a1 1 0 0 1 1 1v8a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1Zm8 0a1 1 0 0 1 1 1v8a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1ZM12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Z"></path>
+                  </svg>
+                </span>
+                <span class="btn-text">Break End</span>
+              </button>
+
+              <button
+                id="checkout-btn"
+                class="control-btn danger-btn"
+                disabled
+                type="button"
+              >
+                <span class="btn-icon" aria-hidden="true">
+                  <svg class="icon" viewBox="0 0 24 24" focusable="false">
+                    <path d="M19 12a1 1 0 0 1-1 1H9.4l2.3 2.3a1 1 0 1 1-1.4 1.4l-4-4a1 1 0 0 1 0-1.4l4-4a1 1 0 0 1 1.4 1.4L9.4 11H18a1 1 0 0 1 1 1Zm3 7V5a2 2 0 0 0-2-2h-4a1 1 0 1 0 0 2h4v14h-4a1 1 0 1 0 0 2h4a2 2 0 0 0 2-2Z"></path>
+                  </svg>
+                </span>
+                <span class="btn-text">Check Out</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="status-section mobile-only-status">
+            <div class="status-container">
+              <div class="status-item">
+                <span class="status-label">Status</span>
+                <span class="status-value status-field-current" aria-live="polite">Not Started</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">Target</span>
+                <span class="status-value status-field-target">8:00:00</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">Est Checkout Time</span>
+                <span class="status-value status-field-estimated">-</span>
+              </div>
+            </div>
+          </section>
+
+
+          <section class="screen-nav">
+            <button id="open-breaks-screen" class="screen-nav-btn" type="button">
+              <span class="btn-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" focusable="false">
+                  <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2h11A2.5 2.5 0 0 1 20 4.5v15a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 19.5v-15Zm2.5-.5a.5.5 0 0 0-.5.5V8h12V4.5a.5.5 0 0 0-.5-.5h-11ZM18 10H6v9.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V10Zm-8.5 2a1 1 0 0 1 1 1v4.2l1.8-1.8a1 1 0 0 1 1.4 1.4l-3.5 3.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 0 1 1.4-1.4l1.8 1.8V13a1 1 0 0 1 1-1Z"></path>
+                </svg>
+              </span>
+              <span class="btn-text">View Break Timeline</span>
+            </button>
+          </section>
+        </section>
+
+        <section id="breaks-screen" class="screen hidden">
+          <section class="status-section desktop-only-status">
+            <div class="status-container">
+              <div class="status-item">
+                <span class="status-label">Status</span>
+                <span class="status-value status-field-current" aria-live="polite">Not Started</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">Target</span>
+                <span class="status-value status-field-target">8:00:00</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="breaks-overview-card">
+            <h2>Break Timeline</h2>
+            <div class="break-summary-grid">
+              <div class="summary-item">
+                <span class="summary-label">Check-In</span>
+                <span id="break-checkin-time" class="summary-value">-</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Current Break</span>
+                <span id="break-current-start" class="summary-value">-</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Break Count</span>
+                <span id="break-total-count" class="summary-value">0</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Total Break</span>
+                <span id="break-total-time" class="summary-value">00:00:00</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label">Est. Checkout</span>
+                <span id="break-est-checkout" class="summary-value">-</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="break-history-card">
+            <div class="break-history-header">
+              <h3>Break Entries</h3>
+            </div>
+            <div id="break-history-list" class="break-history-list"></div>
+            <div id="break-history-empty" class="break-empty">
+              No breaks logged yet.
+            </div>
+          </section>
+
+          <section class="screen-nav">
+            <button id="back-main-screen" class="screen-nav-btn ghost" type="button">
+              <span class="btn-icon" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24" focusable="false">
+                  <path d="M10.7 5.3a1 1 0 0 1 0 1.4L6.4 11H20a1 1 0 1 1 0 2H6.4l4.3 4.3a1 1 0 0 1-1.4 1.4l-6-6a1 1 0 0 1 0-1.4l6-6a1 1 0 0 1 1.4 0Z"></path>
+                </svg>
+              </span>
+              <span class="btn-text">Back To Main</span>
+            </button>
+          </section>
+        </section>
+      </main>
+
+      <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Settings</h2>
+            <button
+              id="close-settings"
+              class="close-btn"
+              type="button"
+              aria-label="Close settings"
+            ><svg class="icon" viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M6.7 5.3a1 1 0 0 1 1.4 0L12 9.2l3.9-3.9a1 1 0 1 1 1.4 1.4L13.4 10.6l3.9 3.9a1 1 0 1 1-1.4 1.4L12 12l-3.9 3.9a1 1 0 1 1-1.4-1.4l3.9-3.9-3.9-3.9a1 1 0 0 1 0-1.4Z"></path></svg></button>
+          </div>
+          <div class="modal-body">
+            <div class="setting-item">
+              <label class="setting-label">
+                <input type="checkbox" id="ramadan-mode" />
+                <span class="setting-text">Ramadan Mode (7h 30m target)</span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <button id="edit-times" class="settings-action-btn" type="button">
+                Edit Times
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="time-edit-modal" class="modal hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Edit Times</h2>
+            <button
+              id="close-time-edit"
+              class="close-btn"
+              type="button"
+              aria-label="Close time edit"
+            ><svg class="icon" viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M6.7 5.3a1 1 0 0 1 1.4 0L12 9.2l3.9-3.9a1 1 0 1 1 1.4 1.4L13.4 10.6l3.9 3.9a1 1 0 1 1-1.4 1.4L12 12l-3.9 3.9a1 1 0 1 1-1.4-1.4l3.9-3.9-3.9-3.9a1 1 0 0 1 0-1.4Z"></path></svg></button>
+          </div>
+          <div class="modal-body">
+            <div class="time-edit-section">
+              <h3>Check In Time</h3>
+              <input
+                type="time"
+                id="edit-checkin-time"
+                class="time-input"
+                aria-label="Check in time"
+              />
+              <button id="clear-checkin" class="clear-btn" type="button">
+                Clear
+              </button>
+            </div>
+            <div class="time-edit-section">
+              <div class="breaks-header">
+                <h3>Breaks</h3>
+                <button id="add-break-row" class="clear-btn" type="button">
+                  + Add Break
+                </button>
+              </div>
+              <div id="breaks-list"></div>
+              <button id="clear-breaks" class="clear-btn" type="button">
+                Clear All Breaks
+              </button>
+            </div>
+            <div class="time-edit-section">
+              <h3>Check Out Time</h3>
+              <input
+                type="time"
+                id="edit-checkout-time"
+                class="time-input"
+                aria-label="Check out time"
+              />
+              <button id="clear-checkout" class="clear-btn" type="button">
+                Clear
+              </button>
+            </div>
+            <div class="time-edit-actions">
+              <button id="save-time-edits" class="save-btn" type="button">
+                Save Changes
+              </button>
+              <button id="cancel-time-edits" class="cancel-btn" type="button">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="dialog-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+        <div class="modal-content dialog-content">
+          <div class="modal-header">
+            <h2 id="dialog-title">Notice</h2>
+            <button id="dialog-close" class="close-btn" type="button" aria-label="Close dialog">
+              <svg class="icon" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path d="M6.7 5.3a1 1 0 0 1 1.4 0L12 9.2l3.9-3.9a1 1 0 1 1 1.4 1.4L13.4 10.6l3.9 3.9a1 1 0 1 1-1.4 1.4L12 12l-3.9 3.9a1 1 0 1 1-1.4-1.4l3.9-3.9-3.9-3.9a1 1 0 0 1 0-1.4Z"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="dialog-message" class="dialog-message"></p>
+            <div class="dialog-actions">
+              <button id="dialog-cancel" class="cancel-btn" type="button">Cancel</button>
+              <button id="dialog-confirm" class="save-btn" type="button">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+

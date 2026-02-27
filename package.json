@@ -1,0 +1,54 @@
+{
+  "name": "pwa-time-calculator",
+  "version": "1.0.0",
+  "main": "electron-main.mjs",
+  "scripts": {
+    "build:web": "node build-web.mjs",
+    "cap:sync": "npm run build:web && npx cap sync android",
+    "build:apk": "npm run cap:sync && npm run android:patch-java && cd android && gradlew.bat assembleDebug",
+    "build:exe": "npm run build:web && electron-builder --win nsis --x64",
+    "dist": "npm run build:apk && npm run build:exe",
+    "android:patch-java": "node patch-java17.mjs"
+  },
+  "keywords": [],
+  "author": "Quonain",
+  "license": "ISC",
+  "description": "PWA wrapped for Android and Windows",
+  "devDependencies": {
+    "@capacitor/android": "^7.5.0",
+    "@capacitor/cli": "^7.5.0",
+    "electron": "^40.6.1",
+    "electron-builder": "^26.8.1"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.5.0"
+  },
+  "build": {
+    "appId": "com.quonain.pwa",
+    "productName": "PWA Time Calculator",
+    "files": [
+      "electron-main.mjs",
+      "www/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "icon": "icons/icon-512.png",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

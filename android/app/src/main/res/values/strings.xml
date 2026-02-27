@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Office Time Tracker</string>
+    <string name="title_activity_main">Office Time Tracker</string>
+    <string name="package_name">com.quonain.pwa</string>
+    <string name="custom_url_scheme">com.quonain.pwa</string>
+</resources>

@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "www/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/sw.js",
+      "headers": { "cache-control": "no-cache, no-store, must-revalidate" },
+      "dest": "/sw.js"
+    },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}

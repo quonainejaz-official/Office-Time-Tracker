@@ -1,0 +1,6 @@
+{
+  "appId": "com.quonain.pwa",
+  "appName": "Office Time Tracker",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
