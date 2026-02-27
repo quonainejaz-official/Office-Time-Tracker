@@ -1,0 +1,9 @@
+android/
+dist/
+.gradle-local/
+electron-main.mjs
+build-web.mjs
+patch-java17.mjs
+capacitor.config.json
+package-lock.json
+README.md

@@ -1,17 +1,19 @@
 {
   "version": 2,
-  "builds": [
+  "cleanUrls": true,
+  "headers": [
     {
-      "src": "www/**/*",
-      "use": "@vercel/static"
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
     }
   ],
-  "routes": [
-    {
-      "src": "/sw.js",
-      "headers": { "cache-control": "no-cache, no-store, must-revalidate" },
-      "dest": "/sw.js"
-    },
-    { "src": "/(.*)", "dest": "/$1" }
+  "rewrites": [
+    { "source": "/sw.js", "destination": "/sw.js" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
