@@ -26,10 +26,16 @@
   "build": {
     "appId": "com.quonain.pwa",
     "productName": "PWA Time Calculator",
+    "asar": false,
     "files": [
       "electron-main.mjs",
-      "www/**/*",
       "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "www",
+        "to": "www"
+      }
     ],
     "directories": {
       "output": "dist"
